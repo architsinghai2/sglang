@@ -1,9 +1,22 @@
 ---
 title: "Tool Parser"
 metatags:
-    description: "SGLang function calling: tool parsers for DeepSeek, Llama, Qwen, Mistral, GLM, Kimi K2, and Apertus. OpenAI-compatible tool use API."
+    description: "SGLang function calling: tool parsers for DeepSeek, Llama, Qwen, Mistral, GLM, Kimi K2, Kimi K3, and Apertus. OpenAI-compatible tool use API."
 ---
 This guide demonstrates how to use SGLang’s [Function calling](https://platform.openai.com/docs/guides/function-calling) functionality.
+
+## Kimi K3 tool declarations
+
+For the `kimi_k3` parser, SGLang enables tool-call parsing only when the request
+contains at least one structured tool declaration. Declare tools with the
+OpenAI-compatible `tools` request field or with a structured `tools` field on a
+`system` or `developer` message. Text in a prompt that describes available tools
+does not declare a tool.
+
+When a request has no structured tools, Kimi K3 output is handled as ordinary
+text. If the model emits K3 tool markup in that mode, SGLang does not turn the
+markup into a tool call. Do not infer or execute a tool call from undeclared
+markup.
 
 
 ## Currently supported parsers:
@@ -56,6 +69,11 @@ This guide demonstrates how to use SGLang’s [Function calling](https://platfor
       <td style={{padding: "9px 12px", fontWeight: 500, backgroundColor: "rgba(255,255,255,0.02)"}}>`kimi_k2`</td>
       <td style={{padding: "9px 12px", backgroundColor: "rgba(255,255,255,0.05)"}}>`moonshotai/Kimi-K2-Instruct`</td>
       <td style={{padding: "9px 12px", backgroundColor: "rgba(255,255,255,0.02)"}}></td>
+    </tr>
+    <tr>
+      <td style={{padding: "9px 12px", fontWeight: 500, backgroundColor: "rgba(255,255,255,0.02)"}}>`kimi_k3`</td>
+      <td style={{padding: "9px 12px", backgroundColor: "rgba(255,255,255,0.05)"}}>Kimi K3</td>
+      <td style={{padding: "9px 12px", backgroundColor: "rgba(255,255,255,0.02)"}}>Tool-call parsing is request-scoped and requires at least one structured tool declaration.</td>
     </tr>
     <tr>
       <td style={{padding: "9px 12px", fontWeight: 500, backgroundColor: "rgba(255,255,255,0.02)"}}>`llama3`</td>
